@@ -1,0 +1,57 @@
+html, body {
+  height: 100%;
+  display: grid;
+}
+
+.circle-container {
+  width: 24em;
+  height: 24em;
+  border-radius: 50%;
+  margin: auto;
+  transform: translate(0, 25%);
+  position: relative;
+}
+
+.node {
+  width: 6em;
+  height: 6em;
+  background: #74b9ff;
+  border-radius: 50%;
+}
+
+.primary {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.primary:after,
+.primary:before {
+  content: "";
+  width: 100%;
+}
+
+.adjacent {
+  position: absolute;
+}
+
+.adjacent:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.adjacent:nth-child(2) {
+  top: 0;
+  right: 0;
+}
+
+.adjacent:nth-child(3) {
+  bottom: 0;
+  left: 0;
+}
+
+.adjacent:nth-child(4) {
+  bottom: 0;
+  right: 0;
+}
