@@ -19,14 +19,18 @@ svg {
   fill: #576574;
 }
 
-.node:nth-child(2) text,
+.node:nth-child(2) text {
+  transform: translateY(-10%);
+}
 .node:nth-child(3) text {
   transform: translateY(-8%);
 }
 
-.node:nth-child(4) text,
-.node:nth-child(5) text {
+.node:nth-child(4) text {
   transform: translateY(8%);
+}
+.node:nth-child(5) text {
+  transform: translateY(10%);
 }
 
 .circle:hover {
