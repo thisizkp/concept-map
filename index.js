@@ -29,7 +29,7 @@ const drawLine = (x1, y1, x2, y2) => {
   line.setAttribute("y1", y1);
   line.setAttribute("x2", x2);
   line.setAttribute("y2", y2);
-  line.setAttribute("stroke", "#00d2d3");
+  line.setAttribute("stroke", "#dfe6e9");
   line.setAttribute("stroke-width", 0.8);
   return line;
 }
@@ -87,14 +87,14 @@ const getAdjacentNodes = primaryNode => {
   }).slice(0,4);
 }
 
-const startApp = (subjects, relations) => {
-  window.subjects = subjects;
-  window.relations = relations;
+const startApp = () => {
   drawMap(getRandomNode(subjects));
 }
 
 const fetchSubjects = fetch('./data/subjects.json').then(response => response.json());
 const fetchRelations = fetch('./data/related.json').then(response => response.json());
 Promise.all([fetchSubjects, fetchRelations]).then(([subjects, relations]) => {
-  startApp(subjects, relations);
+  window.subjects = subjects;
+  window.relations = relations;
+  startApp();
 })
