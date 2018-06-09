@@ -24,34 +24,60 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1;
 }
 
-.primary:after,
-.primary:before {
-  content: "";
-  width: 100%;
-}
-
-.adjacent {
+.line {
   position: absolute;
+  border: 1px solid black;
+  width: 50%;
+  top: 50%;
 }
 
-.adjacent:nth-child(1) {
+.edges .adjacent:nth-child(1) {
+  transform-origin: right;
+  transform: rotate(45deg);
+}
+
+.edges .adjacent:nth-child(2) {
+  transform-origin: right;
+  transform: rotate(-45deg);
+}
+
+.edges .adjacent:nth-child(3) {
+  right: 0;
+  transform-origin: left;
+  transform: rotate(45deg);
+}
+
+.edges .adjacent:nth-child(4) {
+  right: 0;
+  transform-origin: left;
+  transform: rotate(-45deg);
+}
+
+.relations .adjacent {
+  position: absolute;
+  width: 4em;
+  height: 4em;
+}
+
+.relations .adjacent:nth-child(1) {
   top: 0;
   left: 0;
 }
 
-.adjacent:nth-child(2) {
+.relations .adjacent:nth-child(2) {
   top: 0;
   right: 0;
 }
 
-.adjacent:nth-child(3) {
+.relations .adjacent:nth-child(3) {
   bottom: 0;
   left: 0;
 }
 
-.adjacent:nth-child(4) {
+.relations .adjacent:nth-child(4) {
   bottom: 0;
   right: 0;
 }
