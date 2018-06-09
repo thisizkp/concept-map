@@ -10,10 +10,6 @@ svg {
   transform: translate(-50%, -50%);
 }
 
-.node text {
-  transform: translateY(-8%);
-}
-
 .relation:nth-child(3) {
   display: none;
 }
@@ -21,4 +17,18 @@ svg {
 .name {
   font-size: 0.6em;
   fill: #576574;
+}
+
+.node:nth-child(2) text,
+.node:nth-child(3) text {
+  transform: translateY(-8%);
+}
+
+.node:nth-child(4) text,
+.node:nth-child(5) text {
+  transform: translateY(8%);
+}
+
+.circle:hover {
+  cursor: pointer;
 }

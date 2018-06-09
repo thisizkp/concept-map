@@ -38,7 +38,6 @@ const drawCircle = (x, y, r) => {
 
 const drawNode = (node, x, y, r) => {
   const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  group.setAttribute("class", "node");
   group.setAttribute("id", node.EID);
   group.appendChild(drawCircle(x, y, r));
   group.appendChild(drawText(subjects[node.EID].name, x, y));
@@ -60,7 +59,7 @@ const drawRelation = (node, x1, y1, x2, y2) => {
   const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
   group.setAttribute("class", "relation");
   group.appendChild(drawLine(x1, y1, x2, y2));
-  group.appendChild(drawText(node.score, x2, y2));
+  group.appendChild(drawText(node.score, (x1+x2)/2, (y1+y2)/2));
   return group;
 }
 
@@ -77,8 +76,12 @@ const drawMap = primaryNode => {
 
   const adjacentNodes = getAdjacentNodes(primaryNode);
   for(let [index, node] of adjacentNodes.entries()) {
-    svg.appendChild(drawRelation(node, x1[index], y1[index], x[index], y[index]));
-    svg.appendChild(drawNode(node, x[index], y[index], 10));
+    const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+    group.setAttribute("class", "node");
+    group.setAttribute("id", node.EID);
+    group.appendChild(drawRelation(node, x1[index], y1[index], x[index], y[index]));
+    group.appendChild(drawNode(node, x[index], y[index], 10));
+    svg.appendChild(group);
   }
 }
 
