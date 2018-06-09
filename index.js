@@ -1,17 +1,4 @@
-const getRandomNode = nodesList => {
-  const keys = Object.keys(nodesList);
-  const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  return nodesList[randomKey];
-}
-
-const getAdjacentNodes = primaryNode => {
-  return relations[primaryNode.EID].sort((a,b) => {
-    if (a.score < b.score) return 1;
-    else if (a.score > b.score) return -1;
-    return 0;
-  }).slice(0,4);
-}
-
+/* SVG Helpers */
 const drawText = (name, x, y) => {
   const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
   text.textContent = name;
@@ -36,14 +23,6 @@ const drawCircle = (x, y, r) => {
   return circle;
 }
 
-const drawNode = (node, x, y, r) => {
-  const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  group.setAttribute("id", node.EID);
-  group.appendChild(drawCircle(x, y, r));
-  group.appendChild(drawText(subjects[node.EID].name, x, y));
-  return group;
-}
-
 const drawLine = (x1, y1, x2, y2) => {
   const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
   line.setAttribute("x1", x1);
@@ -53,6 +32,14 @@ const drawLine = (x1, y1, x2, y2) => {
   line.setAttribute("stroke", "#00d2d3");
   line.setAttribute("stroke-width", 0.8);
   return line;
+}
+
+const drawNode = (node, x, y, r) => {
+  const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  group.setAttribute("id", node.EID);
+  group.appendChild(drawCircle(x, y, r));
+  group.appendChild(drawText(subjects[node.EID].name, x, y));
+  return group;
 }
 
 const drawRelation = (node, x1, y1, x2, y2) => {
@@ -69,7 +56,6 @@ const drawMap = primaryNode => {
     svg.removeChild(svg.lastChild);
   }
 
-  // TODO: refactor dimensions logic
   svg.appendChild(drawNode(primaryNode, 150, 150, 20));
   const x = [60, 240, 60, 240]; const y = [60, 60, 240, 240];
   const x1 = [135, 165, 135, 165]; const y1 = [135, 135, 165, 165];
@@ -83,6 +69,22 @@ const drawMap = primaryNode => {
     group.appendChild(drawNode(node, x[index], y[index], 10));
     svg.appendChild(group);
   }
+}
+
+/* DATA LOGIC */
+const getRandomNode = nodesList => {
+  const keys = Object.keys(nodesList);
+  const randomKey = keys[Math.floor(Math.random() * keys.length)];
+  return nodesList[randomKey];
+}
+
+const getAdjacentNodes = primaryNode => {
+  if (!relations[primaryNode.EID]) return [];
+  return relations[primaryNode.EID].sort((a,b) => {
+    if (a.score < b.score) return 1;
+    else if (a.score > b.score) return -1;
+    return 0;
+  }).slice(0,4);
 }
 
 const startApp = (subjects, relations) => {
